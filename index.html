@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="turbolinks-cache-control" content="no-preview">
+   <link rel="canonical" href="index.html">
+   <title>CGPA Calculator – Calculate Your CGPA</title>
+   <link href="https://fonts.googleapis.com/css?family=Barlow:400,400i,500" rel="stylesheet">
+   <link href="assets/stylesheets/application-ec76f5b9.css" rel="stylesheet" />
+   <link rel="apple-touch-icon" sizes="180x180" href="assets\images\favicon_io/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="assets\images\favicon_io/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="assets\images\favicon_io/favicon-16x16.png">
+   <link rel="manifest" href="assets\images\favicon_io/site.webmanifest">
+   </head>
+
+<body class="index" data-calculator='gpa'>
+   <header class="page-header"></header>
+
+   <section class="page-section" id="gpa-calculator">
+      <div class="page-calculator js-calculator">
+         <div class="page-calculator__header">
+            <h3 class="page-calculator__title">Current CGPA (Optional)</h3>
+            <div class="page-calculator__fields">
+               <input class="page-calculator__current-gpa js-current-grade js-calculate js-store" type="number"
+                  placeholder="Current GPA" min="0" max="4.0" data-type="currentGrade">
+               <input class="page-calculator__current-credits js-current-credits js-calculate js-store" type="number"
+                  placeholder="Total Credits" min="0" data-type="currentCredits">
+            </div>
+         </div>
+         <ul class="page-groups" id="js-semesters"></ul>
+         <!-- <p>Note: Credits are auto adjusted to 3.0. Changes can be done.</p> -->
+         <button class="page-calculator__button-create js-item-action" data-type="semester" data-action="create">Add
+            Semester</button>
+         <div class="page-calculator__output">
+            <div class="page-calculator__meter">
+               <div class="page-calculator__meter-outer"></div>
+               <div class="page-calculator__meter-graph" id="js-calculator-graph" data-value="0">
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-1"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-2"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-3"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-4"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-5"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-6"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-7"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-8"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-9"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-10"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-11"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-12"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-13"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-14"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-15"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-16"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-17"></span>
+                  <span class="page-calculator__meter-slice page-calculator__meter-slice-18"></span>
+               </div>
+               <div class="page-calculator__meter-inner"></div>
+            </div>
+            <div class="page-calculator__masks"></div>
+            <div class="page-calculator__icons"></div>
+            <div class="page-calculator__output-text">
+               <div class="page-calculator__output-value" id="js-cumulative-gpa">0</div>
+               <div class="page-calculator__output-label">Cumulative GPA</div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="home-section" id="gpa-calculators">
+      <div class="home-display home-display--header unit-home-content--header">
+      </div>
+      <div class="body-template" id="js-course-template">
+         <li class="page-block js-course">
+            <input class="page-block__input page-block__input--name js-course-name js-store" type="text"
+               placeholder="Course name" data-type="name" aria-label="Course name">
+            <select class="page-block__select page-block__select--grade js-course-grade js-calculate js-store"
+               data-type="grade" aria-label="Course grade">
+               <option selected="selected" disabled="disabled" hidden="hidden">Grade</option>
+               <option value="4.0">A</option>
+               <option value="3.7">A-</option>
+               <option value="3.3">B+</option>
+               <option value="3.0">B</option>
+               <option value="2.7">B-</option>
+               <option value="2.3">C+</option>
+               <option value="2.0">C</option>
+               <option value="1.7">C-</option>
+               <option value="1.3">D+</option>
+               <option value="1.0">D</option>
+               <option value="0.7">D-</option>
+               <option value="0.0">F/I</option>
+
+            </select>
+            <input class="page-block__input page-block__input--credits js-course-credits js-calculate js-store"
+               type="number" placeholder="Credits" data-type="credits" aria-label="Course credits">
+            <select class="page-block__select page-block__select--weight js-course-weight js-calculate js-store"
+               disabled="disabled" hidden="hidden" data-type="weight" aria-label="Course weight"></select></select>
+            <button class="page-block__button-remove js-item-action js-item-action-remove" data-type="course"
+               data-action="remove" aria-label="Remove course"></button>
+         </li>
+      </div>
+      <div class="body-template" id="js-semester-template">
+         <li class="page-group js-semester">
+            <div class="page-group__header">
+               <h3 class="page-group__title" contenteditable="true">Semester</h3>
+               <div class="page-group__toggle">
+                  <input class="page-group__toggle-input js-weight-toggle" id="toggle" hidden="hidden" type="checkbox"
+                     value="off" data-type="weightToggle">
+               </div>
+            </div>
+            <button class="page-group__button-remove js-item-action" data-type="semester" data-action="remove"
+               aria-label="Remove semester"></button>
+            <ul class="page-blocks">
+               <li class="page-block js-course">
+                  <input class="page-block__input page-block__input--name js-course-name js-store" type="text"
+                     placeholder="Course name" data-type="name" aria-label="Course name">
+                  <select class="page-block__select page-block__select--grade js-course-grade js-calculate js-store"
+                     data-type="grade" aria-label="Course grade">
+                     <option selected="selected" disabled="disabled" hidden="hidden">Grade</option>
+                     <option value="4.0">A</option>
+                     <option value="3.7">A-</option>
+                     <option value="3.3">B+</option>
+                     <option value="3.0">B</option>
+                     <option value="2.7">B-</option>
+                     <option value="2.3">C+</option>
+                     <option value="2.0">C</option>
+                     <option value="1.7">C-</option>
+                     <option value="1.3">D+</option>
+                     <option value="1.0">D</option>
+                     <option value="0.7">D-</option>
+                     <option value="0.0">F/I</option>
+                  </select>
+                  <input class="page-block__input page-block__input--credits js-course-credits js-calculate js-store"
+                     type="number" placeholder="Credits" data-type="credits" aria-label="Course credits">
+                  <button class="page-block__button-remove js-item-action js-item-action-remove" data-type="course"
+                     data-action="remove" aria-label="Remove course"></button>
+               </li>
+               <li class="page-block js-course">
+                  <input class="page-block__input page-block__input--name js-course-name js-store" type="text"
+                     placeholder="Course name" data-type="name" aria-label="Course name">
+                  <select class="page-block__select page-block__select--grade js-course-grade js-calculate js-store"
+                     data-type="grade" aria-label="Course grade">
+                     <option selected="selected" disabled="disabled" hidden="hidden">Grade</option>
+                     <option value="4.0">A</option>
+                     <option value="3.7">A-</option>
+                     <option value="3.3">B+</option>
+                     <option value="3.0">B</option>
+                     <option value="2.7">B-</option>
+                     <option value="2.3">C+</option>
+                     <option value="2.0">C</option>
+                     <option value="1.7">C-</option>
+                     <option value="1.3">D+</option>
+                     <option value="1.0">D</option>
+                     <option value="0.7">D-</option>
+                     <option value="0.0">F/I</option>
+                  </select>
+                  <input class="page-block__input page-block__input--credits js-course-credits js-calculate js-store"
+                     type="number" placeholder="Credits" data-type="credits" aria-label="Course credits">
+                  <button class="page-block__button-remove js-item-action js-item-action-remove" data-type="course"
+                     data-action="remove" aria-label="Remove course"></button>
+               </li>
+               <li class="page-block js-course">
+                  <input class="page-block__input page-block__input--name js-course-name js-store" type="text"
+                     placeholder="Course name" data-type="name" aria-label="Course name">
+                  <select class="page-block__select page-block__select--grade js-course-grade js-calculate js-store"
+                     data-type="grade" aria-label="Course grade">
+                     <option selected="selected" disabled="disabled" hidden="hidden">Grade</option>
+                     <option value="4.0">A</option>
+                     <option value="3.7">A-</option>
+                     <option value="3.3">B+</option>
+                     <option value="3.0">B</option>
+                     <option value="2.7">B-</option>
+                     <option value="2.3">C+</option>
+                     <option value="2.0">C</option>
+                     <option value="1.7">C-</option>
+                     <option value="1.3">D+</option>
+                     <option value="1.0">D</option>
+                     <option value="0.7">D-</option>
+                     <option value="0.0">F/I</option>
+                  </select>
+                  <input class="page-block__input page-block__input--credits js-course-credits js-calculate js-store"
+                     type="number" placeholder="Credits" data-type="credits" aria-label="Course credits">
+                  <button class="page-block__button-remove js-item-action js-item-action-remove" data-type="course"
+                     data-action="remove" aria-label="Remove course"></button>
+               </li>
+               <li class="page-block js-course">
+                  <input class="page-block__input page-block__input--name js-course-name js-store" type="text"
+                     placeholder="Course name" data-type="name" aria-label="Course name">
+                  <select class="page-block__select page-block__select--grade js-course-grade js-calculate js-store"
+                     data-type="grade" aria-label="Course grade">
+                     <option selected="selected" disabled="disabled" hidden="hidden">Grade</option>
+                     <option value="4.0">A</option>
+                     <option value="3.7">A-</option>
+                     <option value="3.3">B+</option>
+                     <option value="3.0">B</option>
+                     <option value="2.7">B-</option>
+                     <option value="2.3">C+</option>
+                     <option value="2.0">C</option>
+                     <option value="1.7">C-</option>
+                     <option value="1.3">D+</option>
+                     <option value="1.0">D</option>
+                     <option value="0.7">D-</option>
+                     <option value="0.0">F/I</option>
+                  </select>
+                  <input class="page-block__input page-block__input--credits js-course-credits js-calculate js-store"
+                     type="number" placeholder="Credits" data-type="credits" aria-label="Course credits">
+                  <button class="page-block__button-remove js-item-action js-item-action-remove" data-type="course"
+                     data-action="remove" aria-label="Remove course"></button>
+               </li>
+            </ul>
+            <div class="page-group__output page-group__output--semester js-semester-gpa">0</div>
+            <button class="page-group__button-create js-item-action" data-type="course" data-action="create">Add Course</button>
+         </li>
+      </div>
+      <div class="body-template" id="js-semester-template--empty">
+         <li class="page-group js-semester">
+            <div class="page-group__header">
+               <h3 class="page-group__title" contenteditable="true">Semester</h3>
+               <div class="page-group__toggle"></div>
+            </div>
+            <button class="page-group__button-remove js-item-action" data-type="semester" data-action="remove"
+               aria-label="Remove semester"></button>
+            <ul class="page-blocks">
+            </ul>
+            <div class="page-group__output page-group__output--semester js-semester-gpa">0</div>
+            <button class="page-group__button-create js-item-action" data-type="course" data-action="create">Add Course</button>
+         </li>
+      </div>
+      <script src="assets/javascripts/application-e2aef622.js"></script>
+      <p class="body-footer">
+         <!-- &#169; A Modified Project -->
+         <a href="mailto:tanviranindo@gmail.com" title="Tanvir Rahman, tanviranindo@gmail.com">@tanviranindo</a>
+         <a> | </a>
+         <a href="https://github.com/tanviranindo" title="View project on Github"><i class="fa fa-github"
+               aria-hidden="true"></i>GitHub</a>
+         <!-- All rights reserved<br> -->
+      </p>
+</body>
+</html>
